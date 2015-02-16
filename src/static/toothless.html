@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <title>Toothless</title>
+
+    <head>
+
+        <link href="/static/lib/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/toothless.css" rel="stylesheet">
+
+        <script src="/static/lib/js/three.js"></script>
+        <script src="/static/lib/js/jquery.min.js"></script>
+        <script src="/static/lib/js/bootstrap.min.js"></script>
+        <script src="/static/lib/js/sprintf.js"></script>
+        <script src="/static/js/logo.js"></script>
+        <script src="/static/js/toothless.js"></script>
+
+    </head>
+
+    <body>
+
+        <div class='container'>
+
+            <!-- Logo -->
+            <div id="toothless">
+                TOOTHLESS
+                <canvas id="render-canvas" height=64></canvas>
+            </div>
+
+            <!-- Quick Launch -->
+            <form class="form-inline" id="quick-launch-form" onsubmit="return quickLaunch()">
+                <div class="form-group">
+                    <!-- <label for="quick-launch-input">Quick launch</label> -->
+                    <input type="text" class="form-control" id="quick-launch-input" placeholder="Quick Launch e.g. toothless/helloworld"  autofocus="autofocus">
+                </div>
+            </form>
+
+            <!-- Tabs -->
+            <div role="tabpanel" style="margin-top: 32px">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#installed" aria-controls="installed" role="tab" data-toggle="tab">Installed Applications</a>
+                    </li>
+                    <li role="presentation">
+                            <a href="#running" aria-controls="running" role="tab" data-toggle="tab">Running Applications</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="installed">
+                        <table id="image-table" class="table table-borderless table-hover">
+                        </table>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="running">
+                        <table id="container-table" class="table table-borderless table-hover">
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </body>
+
+
+</html>
