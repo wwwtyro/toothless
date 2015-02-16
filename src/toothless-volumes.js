@@ -2,7 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var rimraf = require('rimraf');
 
-var rootPath = path.join("/opt/toothless");
+var rootPath = path.join("/opt/toothless/app-data");
 var sharedPath = path.join(rootPath, "shared");
 
 // -------------------------------------------------------------
