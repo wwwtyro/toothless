@@ -9,3 +9,7 @@ wget --quiet -O - https://raw.githubusercontent.com/wwwtyro/toothless/master/ins
 
 Run gimp: [http://localhost:9887/app?repo=toothless/gimp](http://localhost:9887/app?repo=toothless/gimp)
 
+### Control panel
+
+[http://localhost:9887](http://localhost:9887)
+
