@@ -4,6 +4,7 @@ var u = require('underscore');
 var pretty = require('format-error');
 var favicon = require('serve-favicon');
 var jsonParser = require('body-parser').json();
+var exec = require('child_process').exec;
 
 var suspend = require('suspend');
 var resume = suspend.resume;
@@ -279,6 +280,11 @@ io.on('connection', function(socket) {
 // Set up tasks.
 // -------------------------------------------------------------
 setInterval(docker.cleanUpContainers, 600 * 1000);
+
+// -------------------------------------------------------------
+// Set up pulseaudio to accept connections from containers.
+// -------------------------------------------------------------
+exec("pactl load-module module-native-protocol-tcp auth-ip-acl=172.17.0.0/16 auth-anonymous=1");
 
 // -------------------------------------------------------------
 // Kick off the server on port 9887.
