@@ -1,5 +1,7 @@
 # toothless
 
+A service for launching container applications seamlessly from the browser.
+
 ### Installation
 ```
 wget --quiet -O - https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh | sudo sh
