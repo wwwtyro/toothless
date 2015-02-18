@@ -284,7 +284,11 @@ setInterval(docker.cleanUpContainers, 600 * 1000);
 // -------------------------------------------------------------
 // Set up pulseaudio to accept connections from containers.
 // -------------------------------------------------------------
-exec("pactl load-module module-native-protocol-tcp auth-ip-acl=172.17.0.0/16 auth-anonymous=1");
+exec("pactl load-module module-native-protocol-tcp auth-ip-acl=172.17.0.0/16 auth-anonymous=1", function(err, stdout, stderr) {
+    console.log(err);
+    console.log(stdout);
+    console.log(stderr);
+});
 
 // -------------------------------------------------------------
 // Kick off the server on port 9887.
