@@ -120,7 +120,10 @@ app.get('/app', function(req, res) {
                 }
 
                 // Start the app.
-                yield docker.startContainer(repo, env.toothless_X11 === "true", resume());
+                yield docker.startContainer(repo, 
+                                            env.toothless_X11 === "true", 
+                                            env.toothless_PULSEAUDIO === "true", 
+                                            resume());
 
                 var containerInfo = yield docker.getContainerInfo(repo, resume());
                 

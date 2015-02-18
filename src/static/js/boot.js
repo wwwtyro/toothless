@@ -47,6 +47,8 @@ window.onload = function() {
     });
 
     socket.on('close', function() {
+        document.getElementById("status").innerHTML = repo + " has started. You can close this window.";
+        freeze(true);
         window.close();
     });
 

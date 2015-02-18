@@ -156,7 +156,7 @@ function getContainerPublicPort(containerInfo, port) {
 // -------------------------------------------------------------
 // Starts a container.
 // -------------------------------------------------------------
-function startContainer(repo, x11, callback) {
+function startContainer(repo, x11, pulse, callback) {
     suspend.run(function *() {
 
         // Ensure the volumes exist for the app.
@@ -179,6 +179,11 @@ function startContainer(repo, x11, callback) {
         if (x11) {
             opts.Env.push(sprintf("DISPLAY=%s", process.env.DISPLAY));
             opts.HostConfig.Binds.push("/tmp/.X11-unix:/tmp/.X11-unix:ro");
+        }
+
+        // Handle PulseAudio support.
+        if (pulse) {
+            opts.Env.push("PULSE_SERVER=tcp:172.17.42.1:4713");
         }
 
         // Create & start the container.
