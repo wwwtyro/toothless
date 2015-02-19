@@ -203,7 +203,7 @@ app.get("/uidata", function(req, res) {
                 id: c.Id
             });
         }
-        
+
         // Fill out toothless image data.
         for (var i = 0; i < images.length; i++) {
             var im = images[i];
@@ -211,7 +211,7 @@ app.get("/uidata", function(req, res) {
                 return repotag.indexOf(":latest") !== -1;
             });
             if (repoName === undefined) {
-                break;
+                continue;
             }
             var env = yield docker.getImageEnvVars(repoName, resume());
             data.images.push({
