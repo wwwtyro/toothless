@@ -1,3 +1,5 @@
+var child = require('child_process');
+var uuid = require('uuid');
 var pretty = require('format-error');
 var u = require('underscore');
 var sprintf = require('sprintf-js').sprintf;
@@ -162,8 +164,12 @@ function startContainer(repo, x11, pulse, callback) {
         // Ensure the volumes exist for the app.
         volumes.createVolume(repo);
 
+        // Create the hostname
+        hostname = uuid.v4();
+
         // Prepare the container options.
         var opts = {
+            Hostname: hostname,
             Image: repo,
             Env: [],
             HostConfig: {
@@ -176,6 +182,9 @@ function startContainer(repo, x11, pulse, callback) {
         }
 
         // Handle X11 support.
+        var history = child.execSync('xhost +local:'+hostname);
+        console.log('xhost +local:'+hostname);
+        console.log("" + history);
         if (x11) {
             opts.Env.push(sprintf("DISPLAY=%s", process.env.DISPLAY));
             opts.HostConfig.Binds.push("/tmp/.X11-unix:/tmp/.X11-unix:ro");

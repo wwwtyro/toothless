@@ -24,6 +24,8 @@ function createVolume(repo) {
         fs.mkdirSync(repoPath);
     }
 
+    fs.chmodSync(sharedPath, 0777);
+    fs.chmodSync(repoPath, 0777);
 }
 
 // -------------------------------------------------------------
