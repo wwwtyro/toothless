@@ -1,13 +1,13 @@
 # toothless
 
-A service for launching container applications seamlessly from the browser.
+Toothless gives native app developers what web developers have had for years: a user-friendly distribution system. Create a Docker container with your application, make it compatible with Toothless with a few lines in your Dockerfile, and push it to Docker Hub. Distributing your application is now as simple as posting a link.
 
 ### Installation
 ```
 wget --quiet -O - https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh | sudo sh
 ```
 
-([here's the install script for the paranoid](https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh))
+([Here's the install script.](https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh))
 
 ### Try it out
 

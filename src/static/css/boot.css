@@ -36,3 +36,19 @@ body {
     width: 100%;
     text-align: center;
 }
+
+.whysolong {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  width: 30%;
+  margin-left: 35%;
+  color: black;
+  padding: 16px;
+  border: 1px solid black;
+  border-bottom: none;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  font-size: 16px;
+  background: rgb(255,255,192);
+}

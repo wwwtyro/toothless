@@ -2,6 +2,10 @@ var socket = io();
 
 window.onload = function() {
 
+    setTimeout(function() {
+        document.getElementById("whysolong").style.display="block";
+    }, 4000);
+
     var repo = getURLParameter('repo');
 
     socket.emit('follow boot', repo)
