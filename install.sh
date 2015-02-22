@@ -10,7 +10,6 @@ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6CFCE259
 
 apt-get update
-apt-get install -y lxc-docker-1.5.0 
 apt-get install -y toothless
 
 
