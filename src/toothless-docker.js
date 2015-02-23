@@ -182,11 +182,8 @@ function startContainer(repo, x11, pulse, callback) {
         }
 
         // Handle X11 support.
-        var history = child.execSync('xhost +local:'+hostname);
-        console.log('xhost +local:'+hostname);
-        console.log("" + history);
         if (x11) {
-            opts.Env.push(sprintf("DISPLAY=%s", process.env.DISPLAY));
+            opts.Env.push("DISPLAY=:0");
             opts.HostConfig.Binds.push("/tmp/.X11-unix:/tmp/.X11-unix:ro");
         }
 
