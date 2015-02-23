@@ -5,7 +5,7 @@ Toothless gives native app developers what web developers have had for years: a 
 wget --quiet -O - https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh | sudo sh
 ```
 
-([Here's the install script.](https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh))
+[Here's the installation script.](https://raw.githubusercontent.com/wwwtyro/toothless/master/install.sh)
 
 ### Try it out
 
