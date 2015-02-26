@@ -1,0 +1,80 @@
+<html>
+
+    <body>
+
+        <link href="bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            
+            @font-face {
+              font-family: 'Open Sans';
+              font-style: normal;
+              font-weight: 400;
+              src: local('Open Sans'), local('OpenSans'), url(OpenSans.woff) format('woff');
+            }
+
+            body {
+                background: url("bg-light.png");
+                background-size: cover;
+                margin: 0px;
+                padding: 0px;
+                overflow: hidden;
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            input {
+                margin: 8px;
+            }
+
+            .flex-center {
+                display: flex; 
+                align-items: center; 
+                width: 100%; 
+                height: 100%; 
+                justify-content: center;
+                border: none;
+                box-sizing: border-box;
+                margin: 0px;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+
+        </style>
+
+        <div class="flex-center">
+            <div class="center">
+                <canvas id="logo"></canvas><br><br>
+                <span id="confirm"></span><br><br>
+                <input class="btn btn-default btn-sm" type="button" value="Yes" onclick="yes()">
+                <input class="btn btn-default btn-sm" type="button" value="No" onclick="no()">
+            </div>
+        </div>
+
+        <script src="three.min.js"></script>
+        <script src="logo.js"></script>
+
+        <script>
+
+            var gui = require('nw.gui');
+            document.getElementById("confirm").innerHTML = gui.App.argv.join(" ");
+
+            logo("logo", 64, 64);
+
+            function yes() {
+                process.stdout.write("toothless_confirm_yes");
+                gui.App.quit();
+            }
+
+            function no() {
+                process.stdout.write("toothless_confirm_no");
+                gui.App.quit();
+            }
+
+        </script>
+
+    </body>
+
+</html>

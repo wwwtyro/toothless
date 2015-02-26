@@ -1,0 +1,10 @@
+{
+  "name": "confirm",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "frame": false,
+    "width": 512,
+    "height": 256
+  }
+}
