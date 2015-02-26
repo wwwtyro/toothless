@@ -12,11 +12,14 @@ var resume = suspend.resume;
 var pubsub = require('./pubsub-hist');
 var docker = require('./toothless-docker');
 var volumes = require('./toothless-volumes');
+var gui = require('./toothless-gui');
 
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(http, {
+    origins: "http://localhost:9887"
+});
 
 // Express app initialization
 app.disable('etag');
@@ -31,26 +34,37 @@ var booting = {};
 // -------------------------------------------------------------
 app.get('/app', function(req, res) {
 
-    // Get the repo name and tag.
-    var repo = req.query.repo + ":latest";
-
-    // validate repo name
-    if (!volumes.validRepoPath(repo)) {
-        res.send("There's something suspicious about that image name.");
-        return;
-    }
-
-    // Is it already booting?
-    if (booting[repo] !== undefined) {
-        // Yes, redirect to boot page.
-        var url = sprintf('http://localhost:9887/boot?repo=%s', repo);
-        res.redirect(url);
-        return;
-    }
-
-    // It's not booting.
     suspend.run(function *() { 
 
+        // If this is not coming from the Toothless ui, get confirmation
+        // of installation from the user.
+        if (req.get('origin') !== "http://localhost:9887") {
+            var yes = yield gui.confirm(sprintf("Do you want to open %s?", req.query.repo), resume());
+            if (!yes) {
+                res.send("Operation rejected by user.");
+                return;
+            }
+        }
+
+        // Get the repo name and tag.
+        var repo = req.query.repo + ":latest";
+
+        // validate repo name
+        if (!volumes.validRepoPath(repo)) {
+            res.send("There's something suspicious about that image name.");
+            return;
+        }
+
+        // Is it already booting?
+        if (booting[repo] !== undefined) {
+            // Yes, redirect to boot page.
+            var url = sprintf('http://localhost:9887/boot?repo=%s', repo);
+            res.redirect(url);
+            return;
+        }
+
+        // It's not booting.
+    
         // Is it already running and a singleton?
         var containerInfo = yield docker.getContainerInfo(repo, resume());
         if (containerInfo !== null) {
@@ -181,6 +195,10 @@ app.get('/app', function(req, res) {
 app.get("/uidata", function(req, res) {
     suspend.run(function *() {
 
+        // if (req.get('origin') !== "http://localhost:9887") {
+        //     return;
+        // }
+
         var data = {
             containers: [],
             images: []
@@ -245,18 +263,45 @@ app.get('/', function(req, res) {
 // Miscellaneous api functions.
 // -------------------------------------------------------------
 app.post('/stop-container', jsonParser, function(req, res) {
-    docker.stopContainerAsync(req.body.id);
-    res.end();
+    suspend.run(function *() {
+
+        res.send("{}");
+        if (req.get('origin') !== "http://localhost:9887") {
+            return;
+        }
+        docker.stopContainerAsync(req.body.id);
+
+    }, function(err) {
+        errorHandler(err);
+    });
 });
 
 app.post('/kill-container', jsonParser, function(req, res) {
-    docker.killContainerAsync(req.body.id);
-    res.end();
+    suspend.run(function *() {
+
+        res.send("{}");
+        if (req.get('origin') !== "http://localhost:9887") {
+            return;
+        }
+        docker.killContainerAsync(req.body.id);
+
+    }, function(err) {
+        errorHandler(err);
+    });
 });
 
 app.post('/uninstall-image', jsonParser, function(req, res) {
-    docker.uninstallImage(req.body.repo + ":latest");
-    res.end();
+    suspend.run(function *() {
+
+        res.send("{}");
+        if (req.get('origin') !== "http://localhost:9887") {
+            return;
+        }
+        docker.uninstallImage(req.body.repo + ":latest");
+
+    }, function(err) {
+        errorHandler(err);
+    });
 });
 
 // -------------------------------------------------------------

@@ -1,4 +1,3 @@
-var child = require('child_process');
 var uuid = require('uuid');
 var pretty = require('format-error');
 var u = require('underscore');
